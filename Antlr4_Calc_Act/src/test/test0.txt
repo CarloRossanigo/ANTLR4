@@ -1,0 +1,20 @@
+PI
+(1+2)
+EULER*3
+i: INT : 5
+l: DOUBLE : 9
+k: INT : 9
+k
+l
+i
+k<i
+5<7
+5=7
+i=6
+i=5
+COS(1+2)
+ABS(ROUND(-5.6))
+2*PI
+COS(2*PI)
+3+5<0
+3^(1/3)
