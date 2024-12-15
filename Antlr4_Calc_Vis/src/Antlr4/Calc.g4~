@@ -1,0 +1,42 @@
+grammar Calc;
+
+@header {
+    package Antlr4;
+}
+
+// Parser rules
+prog:  (decl | expr)+ EOF #Program
+     ;
+
+decl: ID ':' TYPE ':' NUM  #Declaration
+     ;
+
+expr: '(' expr ')'         #Paren
+	| expr (GREAT | LESS | EQUALS | NEQUALS) expr  #GreatLessEqualsNEquals
+    | expr (MUL | DIV | POW) expr #MultDivPow
+    | expr (ADD | SUB) expr        #AddSub
+    | ID                           #Variabile
+    | NUM                          #Numero
+    | COSTANT                      #Costante
+    | FUNCTION '(' expr ')'        #Funzione
+    ;
+
+// Lexer rules
+ID      : [a-z][a-zA-Z0-9_]*;
+FUNCTION: 'COS' | 'SIN' | 'TAN' | 'SQRT' | 'LOG' | 'LN' | 'ACOS' | 'ABS' | 'ROUND' | 'ASIN' | 'ATAN' | 'COSH' | 'SINH' | 'TANH' | 'EXP';
+COSTANT : ('-'? 'PI') | ('-'? 'EULER');
+NUM     : '0' | '-'? [0-9]+ ('.' [0-9]+)?;
+TYPE    : 'INT' | 'FLOAT' | 'DOUBLE';
+LPAREN  : '(';
+RPAREN  : ')';
+MUL     : '*';
+DIV     : '/';
+ADD     : '+';
+SUB     : '-';
+POW     : '^';
+LESS    : '<' | '<=';
+GREAT   : '>' | '>=';
+EQUALS  : '=';
+NEQUALS : '!=';
+COMMENT : '--' ~[\r\n]* -> skip;
+WS      : [ \t\r\n]+ -> skip ;
