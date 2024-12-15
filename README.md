@@ -1,7 +1,7 @@
 
 # ANTLR4 Java Projects
 
-This repository contains three initial projects that utilize **ANTLR4** for language parsing and code generation in **Java**. The projects focus on constructing grammars (with or without a visitor pattern) for a calculator that supports basic operations (definition, arithmetic operations, functions) and set theory (definition, unary and binary operations). The semantics of these languages are implemented in **Java**.
+This repository contains a pdf that introduces the topic of parsing and three initial projects that utilize **ANTLR4** for language parsing and code generation in **Java**. The projects focus on constructing grammars (with or without a visitor pattern) for a calculator that supports basic operations (definition, arithmetic operations, functions) and set theory (definition, unary and binary operations). The semantics of these languages are implemented in **Java**.
 
 Below are the steps to compile and run the project in three different ways: via terminal, Eclipse, and using a JAR file.
 
