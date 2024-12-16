@@ -60,8 +60,6 @@ Now, you can run the main application (e.g., `EspressioneApp`) and specify the i
 $ java src/App/EspressioneApp src/test/test0.txt
 ```
 
----
-
 ### 2. Compile via Eclipse
 
 #### Step 1: Set up the project in Eclipse
@@ -84,17 +82,10 @@ $ java src/App/EspressioneApp src/test/test0.txt
 #### Step 3: Run the program
 You can now run the application directly from Eclipse by clicking on `Run`. The application will prompt you for an input file and process it accordingly.
 
----
 
 ### 3. Compile and Run via JAR
 
-If you've already compiled the project and generated a JAR file, you can execute the program via the `java -jar` command.
-
-#### Step 1: Create the JAR file
-
-If you haven't created a JAR file yet, you can do so from Eclipse by going to `File -> Export -> Java -> Runnable JAR file`. This will generate an executable JAR file (e.g., `EspressioneApp.jar`).
-
-#### Step 2: Run the JAR
+#### Step 1: Run the JAR
 
 To run the program with an input file via the JAR, use the following command:
 
@@ -102,9 +93,12 @@ To run the program with an input file via the JAR, use the following command:
 $ java -jar EspressioneApp.jar /path/to/file.txt
 ```
 
-Replace `/path/to/file.txt` with the actual path to the text file you want to analyze.
+Replace `/path/to/file.txt` with the actual path to the text file you want to analyze, for istance in our case: src/test/test0.txt
 
----
+#### Step 2: How to create the JAR file
+If you've already compiled the project and generated a JAR file, you can execute the program via the `java -jar` command.
+
+If you haven't created a JAR file yet, you can do so from Eclipse by going to `File -> Export -> Java -> Runnable JAR file`. This will generate an executable JAR file (e.g., `EspressioneApp.jar`).
 
 ## Example Input File
 
