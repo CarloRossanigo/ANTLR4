@@ -44,7 +44,7 @@ Refer to *The Definitive ANTLR4 Reference* by Terence Parr for more guidance.
 After ANTLR generates the Java files, compile them using `javac`:
 
 ```bash
-$ javac src_path_to_folder/*.java
+$ javac path_to_folder/src/*.java
 ```
 
 Alternatively, you can compile just the main application (e.g., `EspressioneApp`):
@@ -90,7 +90,7 @@ You can now run the application directly from Eclipse by clicking on `Run`. The 
 To run the program with an input file via the JAR, use the following command:
 
 ```bash
-$ java -jar EspressioneApp.jar /path/to/file.txt
+$ java -jar EspressioneApp.jar /path_to_file.txt
 ```
 
 Replace `/path/to/file.txt` with the actual path to the text file you want to analyze, for istance in our case: src/test/test0.txt
