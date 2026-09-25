@@ -1,14 +1,14 @@
 package Espr;
 
 public class ValueBool extends Value {
-    private boolean value; // Valore booleano associato
+    private boolean value; // Boolean value linked  
 
-    // Costruttore che inizializza il valore booleano
+    // Constructor to initialize the boolean value  
     public ValueBool(boolean v) {
         this.value = v;
     }
 
-    // Restituisce il valore
+    // Return the value
     @Override
     public Boolean getValue() {
         return value;
