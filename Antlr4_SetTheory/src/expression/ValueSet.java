@@ -3,15 +3,15 @@ package expression;
 import java.util.List;
 
 public class ValueSet extends Value {
-    private List<Object> value; // lista dei valori
+    private List<Object> value; // Value list
 
- // Costruttore che inizializza la lista dei valori
+ // Constructor to initialize the value list
     public ValueSet(List<Object> result) {
         this.value = result;
     }
 
     @Override
- // Restituisce i valori 
+ // Return the value 
     public List<Object> getValue() {
         return value;
     }
