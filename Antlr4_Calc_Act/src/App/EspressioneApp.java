@@ -14,7 +14,7 @@ public class EspressioneApp {
 
 	public static void main(String[] args) {
 		
-		//Voglio un solo argomento: il nome del file
+		// Just the name of the file as  argument
 		if(args.length!=1) {
 			System.err.print("nome file?");
 		}
@@ -26,20 +26,20 @@ public class EspressioneApp {
 			parser.prog();
 			
 			if(MyErrorListener.hasError) {
-				//comunico eventuali errori del Listener
+				// To hndle Listener error 
 			}
 			else {
 			
 			Program prog=parser.program;
 			if(parser.semErrors.isEmpty()) {
-				//valuto le espressioni
+				// Evaluate the expression 
 				ExpressionProcessor ep=new ExpressionProcessor(prog.getExpr());
 				for(String evaluation:ep.getEvaluationResults()) {
 					System.out.println(evaluation);
 				}
 			}else {
 				for(String err:parser.semErrors) {
-					//comunico eventuali errori semantici
+					// Handle and printing semantic error 
 					System.out.println(err);
 				}
 			}
@@ -48,11 +48,11 @@ public class EspressioneApp {
 		}
 		
 	}
-	// Metodo per ottenere il parser a partire dal nome del file
+	// Methods to obtain parser from the file name 
 	private static EsprParser getParser(String fileName) {
 		EsprParser parser=null;
 		try {
-			// Creazione dello stream di input a partire dal file
+			// Creation streaming input from the file name  
 			CharStream input=CharStreams.fromFileName(fileName);
 			EsprLexer lexer=new EsprLexer(input);
 			CommonTokenStream tokens=new CommonTokenStream(lexer); 
@@ -62,7 +62,7 @@ public class EspressioneApp {
 			parser.addErrorListener(new MyErrorListener());
 			
 		} catch(IOException e) {
-			// Gestione delle eccezioni in caso di errore nell'apertura del file
+			// Handle exceptions if there are errors opening the file 
 			e.printStackTrace();
 		}
 		
