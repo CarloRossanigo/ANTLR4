@@ -5,19 +5,19 @@ import java.util.List;
 
 public class Program {
     
-    private List<Expression> expressions; // Lista delle espressioni nel programma
+    private List<Expression> expressions; // Expression list 
     
-    // Costruttore che inizializza la lista delle espressioni
+    // Constrcutor that initalize the expression list 
     public Program() {
         this.expressions = new ArrayList<>();
     }
     
-    // Aggiunge un'espressione alla lista
+    // Adding an expression to the list 
     public void addExpression(Expression e) {
         expressions.add(e);
     }
     
-    // Restituisce la lista delle espressioni
+    // Return an expression list  
     public List<Expression> getExpr() { 
         return expressions;
     }
