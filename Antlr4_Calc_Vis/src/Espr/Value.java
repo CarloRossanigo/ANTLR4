@@ -1,7 +1,7 @@
 package Espr;
 
-//Classe astratta per i valori
+//Abstract class for values 
 public abstract class Value {
-	// Metodo astratto che restituisce il valore associato all'oggetto Value
+	// Abstract methods to return the value linked to Value (object)
 	public abstract Object getValue();
 }
