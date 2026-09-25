@@ -8,17 +8,17 @@ public class SetExpression extends Expression {
     private Expression left; 
     private Expression right;
     private String operator;
-//Costruttore per le espressioni con due operandi e un operatore logico
+//Constructor for the expression with two operand and a logic operator 
     public SetExpression(Expression left, Expression right, String operator) {
         this.left = left;
         this.right = right;
         this.operator = operator;
     }
-//Costruttore per le operazioni unarie(Complemento)
+//Constructor for the unary operations (Complement)
     public SetExpression(Expression argument, String operator) {
         this(argument, null, operator);
     }
-//Evaluation dell'operazione
+//Operation Evaluation 
     @Override
     public Value evaluate(Environment env) {
         Value leftValue = left.evaluate(env);
@@ -62,7 +62,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-//Unione di due insiemi
+//Union of two sets 
     private List<Object> unione(List<Object> left, List<Object> right) {
         List<Object> result = new ArrayList<>(left);
         if (right != null) {
@@ -74,7 +74,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-//Intersezione di due insiemi
+//Intersection of two sets 
     private List<Object> intersezione(List<Object> left, List<Object> right) {
         List<Object> result = new ArrayList<>();
         if (right != null) {
@@ -86,7 +86,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-// Differenza insiemistica fra due insiemi
+// Insiemistic Difference between two sets 
     private List<Object> differenza(List<Object> left, List<Object> right) {
         List<Object> result = new ArrayList<>(left);
         if (right != null) {
@@ -94,7 +94,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-// Differenza simmetrica fra due insiemi
+// Simmetric difference between two sets 
     private List<Object> differenzaSimmetrica(List<Object> left, List<Object> right) {
         List<Object> result = new ArrayList<>(left);
         if (right != null) {
@@ -108,7 +108,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-// Complemento di un insieme
+// Sets Complement 
     private List<Object> complemento(List<Object> set, Environment env) {
         List<Object> result = new ArrayList<>();
         Collection<Value> allSets = env.values().values();
@@ -122,7 +122,7 @@ public class SetExpression extends Expression {
         }
         return result;
     }
-//Minimo di un insieme
+//Minimum of a set 
     private List<Object> min(List<Object> set) {
         if (set.isEmpty()) {
             throw new IllegalArgumentException("Non trovo minimo insieme.");
@@ -141,7 +141,7 @@ public class SetExpression extends Expression {
 
         return List.of(minEl);
     }
-//Massimo di un insieme
+//Maximum of a set 
     private List<Object> max(List<Object> set) {
         if (set.isEmpty()) {
             throw new IllegalArgumentException("Non trovo massimo insieme.");
@@ -160,7 +160,7 @@ public class SetExpression extends Expression {
 
         return List.of(maxEl);
     }
-//Lunghezza di una stringa: per calcolare max e min, trasformo una stringa in un numero, che corrisponde alla sua lunghezza
+//lenght of a string: to calculate max and min, transofmr a string in a number, which is its length
     private float getLunghezza(Object elem) {
         if (elem instanceof Integer || elem instanceof Float) {
             return (float) elem;
