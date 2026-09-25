@@ -7,18 +7,18 @@ import Antlr4.CalcBaseVisitor;
 import Antlr4.CalcParser.ProgramContext;
 public class AntlrToProgram extends CalcBaseVisitor<Program>{
 
-	private List<String> semErrors;// lista degli errori semantici 
+	private List<String> semErrors;// Semantic error list  
 	@Override
 	public Program visitProgram(ProgramContext ctx) {
 		Program prog=new Program();
 		
 		semErrors= new ArrayList<>();
-		// aiuto visitor per trasformare ogni sottoalbero in oggetto Espression
+		// Helping visitor to transofrm each undertree in expression object 
 		
 		AntlrToExpression esprVisitor= new AntlrToExpression(semErrors);
 		for(int i=0;i<ctx.getChildCount();i++) {
 			if(i==ctx.getChildCount()-1) {
-				// l'ultimo figlio è EOF quindi non lo visito
+				// Last child is EOF so don't visit 
 				
 			}
 			else {
@@ -30,7 +30,7 @@ public class AntlrToProgram extends CalcBaseVisitor<Program>{
 		
 	}
 	public List<String> getSemErr(){return semErrors;}
-	// restituisce la lista degli errori semantici 
+	// Return the error semantic list 
 	
 		
 
