@@ -19,28 +19,28 @@ public class EspressioneApp {
 
 	public static void main(String[] args) {
 		
-		//nome file come unico argomento
+		//File name as the argument 
 		if(args.length!=1) {
 			System.err.print("file name?");
 		}
 		else {
 			String fileName=args[0];
 			CalcParser parser=getParser(fileName);
-			// costruisco albero sintattico e inizio il parsing da 'prog'
+			// Building the sintax tree; starting the parsing from 'prog'  
 			
 			ParseTree antlrAST=parser.prog();
 			
 			if(Espr.MyErrorListener.hasError) {
-				// riporto errori di sintassi 
+				// Handle sintax error  
 				
 			}
 			else {
-				// costruisco un visitor per la conversione dell'albero di parsing in espressioni
+				// Building a visitor for tree conversion from parsing to expression 
 				
 			AntlrToProgram progVisitor=new AntlrToProgram();
 			Program prog=progVisitor.visit(antlrAST);
 			if(progVisitor.getSemErr().isEmpty()) {
-				//valutazione delle espressioni
+				// expression evaluation 
 				ExpressionProcessor ep=new ExpressionProcessor(prog.getExpr());
 				for(String evaluation:ep.getEvaluationResults()) {
 					System.out.println(evaluation);
@@ -48,7 +48,7 @@ public class EspressioneApp {
 			}else {
 				List<String> Errori=progVisitor.getSemErr();
 				for(String err:Errori) {
-					//errori semantici
+					// Semantic error 
 					System.out.println(err);
 				}
 			}
@@ -57,16 +57,16 @@ public class EspressioneApp {
 		}
 		
 	}
-//metodo per ottenere il parser dal nome del file
+// Methods to obtain the parser from the filename 
 	private static CalcParser getParser(String fileName) {
 		CalcParser parser=null;
 		try {
-			// Creazione dello stream di input a partire dal file
+			// Creation of the input stream from the filename 
 			CharStream input=CharStreams.fromFileName(fileName);
 			CalcLexer lexer=new CalcLexer(input);
 			CommonTokenStream tokens=new CommonTokenStream(lexer); 
 			parser=new CalcParser(tokens);
-			//gestisco gli errori di sintassi
+			//Handle the sintax error
 			
 			parser.removeErrorListeners();
 			parser.addErrorListener(new MyErrorListener());
