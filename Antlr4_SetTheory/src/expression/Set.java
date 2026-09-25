@@ -1,9 +1,9 @@
 package expression;
 
-//Classe per rappresentare gli insiemi
+//Class to represent the sets 
 public class Set extends Expression {
-    private String id;	//nome insieme 
-//Costruttore che costruisce un insieme a partire dal nome
+    private String id;	//Sets name  
+//Constructor to buld the set from the name 
     public Set(String Id) {
         this.id = Id;
     }
@@ -18,7 +18,7 @@ public class Set extends Expression {
     }
 
     @Override
-    //Evaluation dell'insieme
+    // Set's Evaluation 
     public Value evaluate(Environment environment) {
         if (!environment.values().containsKey(id)) {
             throw new RuntimeException("Insieme non definito: " + id);
