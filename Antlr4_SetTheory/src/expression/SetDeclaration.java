@@ -1,16 +1,16 @@
 package expression;
 
 import java.util.List;
-//Classe per la dichiarazione di un insieme
+//Class to declare a set 
 public class SetDeclaration extends Expression {
-    private String id; //Nome
-    private List<Object> value; //Elementi
-//Costruttore che dichiara un insieme tramite nome e lista degli elementi
+    private String id; //Name
+    private List<Object> value; //Elements
+//Constructor to declare a set from the name and a elements list
     public SetDeclaration(String id, List<Object> value) {
         this.id = id;
         this.value = value;
     }
-//Restituisce la lista degli elementi
+//return the elements list 
     public List<Object> getValue() {
         return value;
     }
@@ -23,7 +23,7 @@ public class SetDeclaration extends Expression {
     public String getId() {
         return id;
     }
-//Evaluation dell'insieme: lo aggiungiamo alla lista degli insiemi definiti
+// Set's Evaluation: to add to the defined sets list
     @Override
     public Value evaluate(Environment environment) {
         ValueSet valueSet = new ValueSet(value);
