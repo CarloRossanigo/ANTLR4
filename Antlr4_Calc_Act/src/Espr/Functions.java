@@ -3,7 +3,7 @@ package Espr;
 public enum Functions {
     COS, SIN, TAN, SQRT, LOG, LN, ACOS, ASIN, ATAN, ABS, ROUND, EXP, COSH, SINH, TANH;
 
-    // Metodo per valutare le funzioni
+    // Methods to evaluate functions
     public double Eval(double arg) {
         switch (this) {
             case COS: return Math.cos(arg); 
