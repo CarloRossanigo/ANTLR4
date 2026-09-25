@@ -1,9 +1,9 @@
 package Espr;
 
 public class Var extends Expression {
-    private String name; // Nome  variabile
+    private String name; // Variable name 
 
-    // Costruttore che inizializza la variabile 
+    // Constructor that intialize the variable  
     public Var(String name) {
         this.name = name;
     }
