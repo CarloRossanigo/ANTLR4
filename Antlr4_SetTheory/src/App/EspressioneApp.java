@@ -18,7 +18,7 @@ import expression.Program;
 public class EspressioneApp {
 
 	public static void main(String[] args) {
-		//Un argomento: nome file
+		//Just file name as argument 
 		if(args.length!=1) {
 			System.err.print("nome file?");
 		}
@@ -29,21 +29,21 @@ public class EspressioneApp {
 			ParseTree antlrAST=parser.prog();
 			
 			if(MyErrorListener.hasError) {
-				//Comunico eventuali errori del Listener
+				//Handle Listener error 
 			}
 			else {
 			
 			AntlrToProgram progVisitor=new AntlrToProgram();
 			Program prog=progVisitor.visit(antlrAST);
 			if(progVisitor.semanticErrors.isEmpty()) {
-				//Valuto le espressioni
+				// Evaluate the expression 
 				ExpressionProcessor ep=new ExpressionProcessor(prog.expressions);
 				for(String evaluation:ep.getEvaluationResults()) {
 					System.out.println(evaluation);
 				}
 			}else {
 				for(String err:progVisitor.semanticErrors) {
-					//comunico eventuali errori semantici
+					//Handle semantic error 
 					System.out.println(err);
 				}
 			}
@@ -52,11 +52,11 @@ public class EspressioneApp {
 		}
 		
 	}
-	// Metodo per ottenere il parser  dal nome del file
+	//Methods to ontain parser from filename 
 	private static TeoriaParser getParser(String fileName) {
 		TeoriaParser parser=null;
 		try {
-			// Creazione dello stream di input a partire dal file
+			// Creation stream input form the file
 			CharStream input=CharStreams.fromFileName(fileName);
 			TeoriaLexer lexer=new TeoriaLexer(input);
 			CommonTokenStream tokens=new CommonTokenStream(lexer); 
@@ -66,7 +66,7 @@ public class EspressioneApp {
 			parser.addErrorListener(new MyErrorListener());
 			
 		} catch(IOException e) {
-			// Gestione delle eccezioni 
+			// Handle exception  
 			e.printStackTrace();
 		}
 		
