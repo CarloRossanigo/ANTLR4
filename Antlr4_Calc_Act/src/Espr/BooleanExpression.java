@@ -5,7 +5,7 @@ public class BooleanExpression extends Expression {
     private Expression right;
     private String operator; //operatore booleano
 
-    //costruttore per espressioni booleane con due operandi e un operatore
+    // Constructor for boolean expression with thw operands and an operator 
     public BooleanExpression(Expression left, Expression right, String operator) {
         this.left = left;
         this.right = right;
@@ -14,14 +14,14 @@ public class BooleanExpression extends Expression {
     
     @Override
     public Value evaluate(Environment env) {
-    	// Valutazione dell'espressione booleana
+    	// Evaluate the boolean expression 
         boolean result = OperationEval(env);
         
         return new ValueBool(result);
     }
 
     private boolean OperationEval(Environment env) {
-    	// Estrazione dei valori delle espressioni sinistra e destra
+    	// Values extraction of the right and left expression 
         double leftV = (Double) left.evaluate(env).getValue();
         double rightV = right != null ? (Double) right.evaluate(env).getValue() : 0.0;
         switch(operator) {
