@@ -1,14 +1,14 @@
 package Espr;
 
 public class ValueNum extends Value {
-    private double value; // Valore numerico associato
+    private double value; // Linked numeric value 
 
-    // Costruttore che inizializza il valore numerico
+    // Constructor that initialize the numeric value  
     public ValueNum(double value) {
         this.value = value;
     }
 
-    // Restituisce il valore 
+    // Return the value  
     @Override
     public Double getValue() {
         return value;
