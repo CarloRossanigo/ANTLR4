@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionProcessor {
-    private List<Expression> expressions; // Lista delle espressioni da valutare
-    private Environment environment; // Ambiente  
+    private List<Expression> expressions; // Expression list to evaluate 
+    private Environment environment; // Environment   
 
-    // Costruttore che inizializza la lista delle espressioni e l'ambiente
+    // Constructor to intialize the expression list and the environment 
     public ExpressionProcessor(List<Expression> expressions) {
         this.expressions = expressions;
         this.environment = new Environment();
     }
     
-    // Metodo per ottenere i risultati della valutazione delle espressioni
+    // Methods to obtain the results form the expression evaluation  
 
     public List<String> getEvaluationResults() {
         List<String> evaluations = new ArrayList<>();
         
         for (Expression e : expressions) {
             try {
-            	// Gestione delle dichiarazioni di variabili
+            	// Handle the variable declaration 
                 if (e instanceof VariableDeclaration) {
                     VariableDeclaration decl = (VariableDeclaration) e;
                     Value value = new ValueNum(decl.getValue());
                     environment.addVariable(decl.getName(), value);
-                } // Valutazione delle espressioni di variabili
+                } // Evaluation of variable expression 
                 else if (e instanceof Var) {
                     Value result = e.evaluate(environment);
                     evaluations.add(e.toString() + " è " + formatValue(result));
@@ -38,7 +38,7 @@ public class ExpressionProcessor {
             }
         }
 
-        return evaluations; // Restituisce i risultati delle valutazioni
+        return evaluations; // return the results evaluation 
     }
 
     private String formatValue(Value value) {
