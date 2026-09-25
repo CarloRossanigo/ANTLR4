@@ -9,10 +9,10 @@
 }
 
 @members {
-    // per gestione errori
+    // To handle errors
     public List<String> vars = new ArrayList<>();
     public List<String> semErrors = new ArrayList<>();
-    // radice dell'AST (di tipo Expression)
+    // AST Root (type expression ) 
     public Program program = new Program();
 }
 
