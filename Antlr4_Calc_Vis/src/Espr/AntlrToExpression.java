@@ -18,8 +18,8 @@ import java.util.List;
 
 public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
-    private HashMap<String, Double> variabili; // Mappa delle variabili dichiarate
-    private List<String> semanticErrors; // Lista per gli errori semantici
+    private HashMap<String, Double> variabili; // Variable delcared Map 
+    private List<String> semanticErrors; // Error semantic list 
 
     public AntlrToExpression(List<String> semanticErrors) {
         variabili = new HashMap<String, Double>();
@@ -28,13 +28,13 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitDeclaration(CalcParser.DeclarationContext ctx) {
-        // Estrae informazioni sulla dichiarazione di variabile
+        // extraction of information about the variable declaration  
         Token idToken = ctx.ID().getSymbol();
         int line = idToken.getLine();
         int col = idToken.getCharPositionInLine() + 1;
         String id = ctx.getChild(0).getText();
 
-        // Controlla se la variabile è già dichiarata
+        // Verifying if the variable i already declared 
         if (variabili.containsKey(id)) {
             semanticErrors.add("Errore: variabile " + id + " già dichiarata alla linea " + line + ", " + col);
         }
@@ -48,7 +48,7 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitAddSub(AddSubContext ctx) {
-        // Gestisce le espressioni di somma e sottrazione
+        // Handle the sum and difference expression 
         Expression left = visit(ctx.expr(0));
         Expression right = visit(ctx.expr(1));
         String op = ctx.getChild(1).getText();
@@ -58,7 +58,7 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitMultDivPow(MultDivPowContext ctx) {
-        // Gestisce le espressioni di moltiplicazione, divisione e potenza
+        // Handle the product, divison and power expression 
         Expression left = visit(ctx.expr(0));
         Expression right = visit(ctx.expr(1));
         String op = ctx.getChild(1).getText();
@@ -68,10 +68,10 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitVariable(VariableContext ctx) {
-        // Controlla l'uso di una variabile
+        // Control the variable use 
         String id = ctx.ID().getText();
 
-        // Errore se la variabile non è stata dichiarata
+        // error if the varibale isn't declared 
         if (!variabili.containsKey(id)) {
             Token idToken = ctx.ID().getSymbol();
             int line = idToken.getLine();
@@ -84,20 +84,20 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitParen(ParenContext ctx) {
-        // Gestisce le espressioni tra parentesi
+        // Handle the expression between parens 
         return visit(ctx.expr());
     }
 
     @Override
     public Expression visitNumber(NumberContext ctx) {
-        // Gestisce i numeri costanti
+        // Handle the constant 
         Double value = Double.parseDouble(ctx.NUM().getText());
         return new NumericExpression(value);
     }
 
     @Override
     public Expression visitGreatLess(GreatLessContext ctx) {
-        // Gestisce le espressioni di confronto (maggiore/meno)
+        // Handle the exprsion of > and < )
         Expression left = visit(ctx.expr(0));
         Expression right = visit(ctx.expr(1));
         String op = ctx.getChild(1).getText();
@@ -106,7 +106,7 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitEqualsNequ(EqualsNequContext ctx) {
-        // Gestisce le espressioni di uguaglianza/diseguaglianza
+        //  Handle the expression = and != 
         Expression left = visit(ctx.expr(0));
         Expression right = visit(ctx.expr(1));
         String op = ctx.getChild(1).getText();
@@ -115,7 +115,7 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitFunction(FunctionContext ctx) {
-        // Gestisce le chiamate a funzioni
+        // Handle the function 
         String functionName = ctx.FUNCTION().getText();
         Expression argument = visit(ctx.expr());
         Functions function = Functions.valueOf(functionName.toUpperCase());
@@ -125,7 +125,7 @@ public class AntlrToExpression extends CalcBaseVisitor<Expression> {
 
     @Override
     public Expression visitCostant(CostantContext ctx) {
-        // Gestisce le costanti
+        // Handle constant 
         String constant = ctx.COSTANT().getText();
         return new NumericExpression(constant);
     }
