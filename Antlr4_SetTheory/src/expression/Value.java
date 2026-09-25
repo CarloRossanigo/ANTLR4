@@ -1,8 +1,8 @@
 package expression;
 
 import java.util.List;
-//Classe astratta per i valori
+//Abstract Class for the value 
 public abstract class Value {
-	// Metodo astratto che restituisce il valore associato all'oggetto Value
+	// Abstract methods to return the linked value to the object value 
 	public abstract List<Object> getValue();
 }
