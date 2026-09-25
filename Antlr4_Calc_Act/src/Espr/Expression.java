@@ -1,9 +1,9 @@
 package Espr;
 
-//Classe astratta che modelizza una espressione
+//Abstract Class that modelize and expression 
 
 public abstract class Expression {
-	//metodo astratto per la valutazione di una espressione
-	// Ogni sottoclasse dovrà implementare questo metodo
+	//Abstract Methods to evaluate the expression 
+	// Each subclass must implement this method  
 public abstract Value evaluate(Environment env);
 }
