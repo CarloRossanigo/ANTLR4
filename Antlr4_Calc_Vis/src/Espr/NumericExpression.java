@@ -1,33 +1,33 @@
 package Espr;
 
 public class NumericExpression extends Expression {
-    private Expression left; // Espressione destra
-    private Expression right; // Espressione(operando) sx
-    private String operator; // Operatore aritmetico
-    private Functions function; // Funzione  
-    private String constant; // Costante 
-    private Double number; // Numero
+    private Expression left; 
+    private Expression right; 
+    private String operator; 
+    private Functions function;   
+    private String constant;  
+    private Double number; 
     
- // Costruttore per espressioni aritmetiche
+ // Constructor for artimethic expression 
     public NumericExpression(Expression left, Expression right, String operator) {
         this.left = left;
         this.right = right;
         this.operator = operator;
     }
- // Costruttore per funzioni
+ // Constructor for function 
     public NumericExpression(Functions function, Expression argument) {
         this.left = argument;
         this.function = function;
     }
- // Costruttore per espressioni costanti
+ // Constructor for constant expression 
     public NumericExpression(String constant) {
         this.constant = constant;
     }
- // Costruttore per numeri
+ //  Constructor for numbers 
     public NumericExpression(Double number) {
         this.number = number;
     }
- // Valuta l'espressione e restituisce il risultato
+ // Evaluate expression adn return the results 
     @Override
     public Value evaluate(Environment env) {
         if (function != null) {
@@ -58,7 +58,7 @@ public class NumericExpression extends Expression {
          
     	}
     }
- // Evaluation dell'operazione
+ // Operation Evaluation 
     private double OperationEval(Environment env) {
         double leftVal = (Double) left.evaluate(env).getValue();
         double rightVal = right != null ? (Double) right.evaluate(env).getValue() : 0.0;
@@ -92,7 +92,7 @@ public class NumericExpression extends Expression {
             return "(" + left.toString() + " " + operator + " " + right.toString() + ")";
         }
     }
-    //arrotondamento
+
     
     private double rounds(double value) {
         return Math.round(value * 1000000.0) / 1000000.0;
