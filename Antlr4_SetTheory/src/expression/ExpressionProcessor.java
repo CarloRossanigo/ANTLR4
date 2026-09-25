@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionProcessor {
-    private List<Expression> expressions; // Lista delle espressioni da valutare
-    private Environment env;  // Ambiente 
+    private List<Expression> expressions; // Expression list to evaluate 
+    private Environment env;  // Environment  
 
-    // Costruttore che inizializza la lista delle espressioni e l'ambiente
+    // Constructor that initialize ehe expression list and the environemnt 
     public ExpressionProcessor(List<Expression> expressions) {
         this.expressions = expressions;
         this.env = new Environment();
     }
- // Metodo per ottenere i risultati della valutazione delle espressioni
+ // Methods to obtian the results of expression evaluation 
     public List<String> getEvaluationResults() {
         List<String> evaluations = new ArrayList<>();
 
         for (Expression e : expressions) {
         	try {
-        		//gestione dichiarazione degli insiemi
+        		// Handle the sets declaration 
             if (e instanceof SetDeclaration) {
                 SetDeclaration decl = (SetDeclaration) e;
                 Value value = new ValueSet(decl.getValue());
@@ -26,16 +26,16 @@ public class ExpressionProcessor {
             } else {
                 String input = e.toString();
                 Value result = e.evaluate(env);
-                //Operazioni booleane
+                //Boolean operations 
                 if (result instanceof ValueBool) {
                     evaluations.add(input + " è " + result.getValue().get(0));
-                }//Operazioni "aritmetiche"
+                }// Set operations 
                 else if (result instanceof ValueSet) {
                     evaluations.add(input + " è " + result.getValue());
                 } 
             }
         	}catch (RuntimeException ex) {
-                evaluations.add("Errore valutando l'espressione: " + ex.getMessage());//Errore valutando l'espressione:
+                evaluations.add("Errore valutando l'espressione: " + ex.getMessage());//Error evaluate the expressions
             }
         }
         return evaluations;
