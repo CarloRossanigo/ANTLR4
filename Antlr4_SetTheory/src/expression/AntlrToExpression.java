@@ -15,39 +15,39 @@ import ANTLR4.TeoriaParser.ComplContext;
 import ANTLR4.TeoriaParser.UnionIntDiffSimmContext;
 
 public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
-    private List<String> sets; // memorizzo gli insiemi dichiarati
-    private List<String> semanticErrors; // Lista errori semantici
+    private List<String> sets; 
+    private List<String> semanticErrors; // Semantic error list 
 
     public AntlrToExpression(List<String> semanticErrors) {
         sets = new ArrayList<>();
         this.semanticErrors = semanticErrors;
     }
-    //Override dei metodi di visita
+    
     @Override
     public Expression visitDeclaration(DeclarationContext ctx) {
-    	//Recupero le informazioni per dichiarazione insieme
+    	//retrieve the information to declare a set  
         Token idToken = ctx.ID().getSymbol();
         int line = idToken.getLine();
         int col = idToken.getCharPositionInLine() + 1;
         String id = ctx.ID().getText();
-     // Controlla se l'insieme è già dichiarato
+     // Control if the set is already declared 
         if (sets.contains(id)) {
             semanticErrors.add("Errore: insieme " + id + " già dichiarato alla riga " + line + ", colonna " + col);
         } else {
             sets.add(id);
         }
-        //Recupero gli elementi dell'insieme
+        //Retrieve the set elements 
         List<Object> values = new ArrayList<>();
-        //numeri
+        // Numbers
         for (TerminalNode numToken : ctx.NUM()) {
             float num = Float.parseFloat(numToken.getText());
-            if(!values.contains(num)) //Non voglio duplicati
+            if(!values.contains(num)) // Don't accept duplicates 
             values.add(num);
         }
-        //stringhe
+        // String
         for (TerminalNode stringToken : ctx.STRING()) {
             String s = stringToken.getText();
-            if(!values.contains(s)) //Non voglio duplicati
+            if(!values.contains(s)) // Don't accept duplicates 
             values.add(s);
         }
 
@@ -55,7 +55,7 @@ public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
     }
 
     @Override
-    //gestione operazioni a due operandi fra insiemi
+    // Handle operations between sets with two operands 
     public Expression visitUnionIntDiffSimm(UnionIntDiffSimmContext ctx) {
         Expression left = visit(ctx.expr(0));
         Expression right = visit(ctx.expr(1));
@@ -64,7 +64,7 @@ public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
     }
 
     @Override
-  //gestione operazione complementare fra insiemi
+  //Handle Complimentary operatioin between sets 
     public Expression visitCompl(ComplContext ctx) {
         Expression expr = visit(ctx.expr());
         String op = ctx.getChild(0).getText();
@@ -72,13 +72,13 @@ public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
     }
 
     @Override
-    //gestione delle espressioni fra parentesi
+    // Handle expression between parens 
     public Expression visitParens(ParensContext ctx) {
         return visit(ctx.expr());
     }
 
     @Override
-    //gestione insiemi
+    // Handle sets
     public Expression visitSet(SetContext ctx) {
         Token idToken = ctx.ID().getSymbol();
         int line = idToken.getLine();
@@ -92,7 +92,7 @@ public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
     }
 
     @Override
-    //gestione operazioni booleane
+    //Handle boolean operations 
     public Expression visitEqNeqCdxCsx(EqNeqCdxCsxContext ctx) {
         Expression l = visit(ctx.expr(0));
         Expression r = visit(ctx.expr(1));
@@ -101,7 +101,7 @@ public class AntlrToExpression extends TeoriaBaseVisitor<Expression> {
     }
 
     @Override
-    //gestione calcolo Min e Max
+    //Handle minimum and maximum of a set 
     public Expression visitMinMax(MinMaxContext ctx) {
         Expression r = visit(ctx.expr());
         String op = ctx.getChild(0).getText();
