@@ -1,28 +1,28 @@
 package Espr;
 
 public class VariableDeclaration extends Expression {
-    private String name;  // Nome della variabile
-    private String type;  // Tipo della variabile 
-    private double value; // Valore associato 
+    private String name;  // Variable name 
+    private String type;  // Variable type  
+    private double value; // Associated Value  
 
-    // Costruttore che inizializza la variabile con nome, tipo e valore
+    // Constructor to iniztalie the variable with name, type and value  
     public VariableDeclaration(String name, String type, double value) {
         this.name = name;
         this.type = type;
         this.value = value;
     }
 
-    // Restituisce il nome della variabile
+    // Return the variable name 
     public String getName() {
         return name;
     }
 
-    // Restituisce il tipo della variabile
+    // Return the variable type  
     public String getType() {
         return type;
     }
 
-    // Restituisce il valore della variabile
+    // Return the variable's value 
     public double getValue() {
         return value;
     }
@@ -33,11 +33,11 @@ public class VariableDeclaration extends Expression {
         return name + " : " + type + " : " + value;
     }
 
-    // Esegui la valutazione della variabile 
+    // Execution of the variablkes's evaluation  
     @Override
     public Value evaluate(Environment env) {
         Value value = new ValueNum(this.value);  
-        env.addVariable(name, value);  // Aggiunge la variabile all'ambiente
-        return value;  // Restituisce il valore
+        env.addVariable(name, value);  // Adding the variable to the environment 
+        return value;  // Return the value 
     }
 }
