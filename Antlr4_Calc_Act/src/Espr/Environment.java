@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 
 public class Environment {
-    private HashMap<String, Value> context;// mappa delle variabili e dei loro valori 
+    private HashMap<String, Value> context;// hMap of variables and their values  
     
 
     public Environment() {
@@ -13,22 +13,22 @@ public class Environment {
     }
 
     public void addVariable(String name, Value value) {
-        context.put(name, value);// aggiunge una variabile al contesto
+        context.put(name, value);// adding variables to the context 
         
     }
 
     
     public Value getVariable(Var name) {
         if (context.containsKey(name.toString())) {
-            return context.get(name.toString());// restituisce il valore della variabile 
+            return context.get(name.toString());// returning the variables values  
            
         } else {
-            throw new RuntimeException("Non trovo la variabile: " + name);//Variabile non trovata
+            throw new RuntimeException("Non trovo la variabile: " + name);// Variable not found 
         }
     }
 
     public Value evaluate(Expression expr) {
-        return expr.evaluate(this);// valuta l'espressione nel contesto corrente 
+        return expr.evaluate(this);// Evaluate teh expression in the current context  
        
     }
 }
