@@ -3,9 +3,9 @@ package Espr;
 public class BooleanExpression extends Expression {
     private Expression left; 
     private Expression right; 
-    private String operator; // Operatore logico
+    private String operator; // Logic Operator 
 
-    //costruttore per espressioni logiche con due operandi e un operatore
+    //Constructor for logic expression with 2 operands and operator 
     public BooleanExpression(Expression left, Expression right, String operator) {
         this.left = left;
         this.right = right;
@@ -14,24 +14,24 @@ public class BooleanExpression extends Expression {
 
     @Override
     public Value evaluate(Environment env) {
-        // Valuta l'espressione logica e ritorna il risultato
+        // Evaluate the logic expression and return the result 
         boolean result = OperationEval(env);
         return new ValueBool(result);
     }
 
     private boolean OperationEval(Environment env) {
-        // Esegue l'operazione booleana tra i due operandi
+        // Execute the boolean operaion between 2 operands 
         double leftV = (Double) left.evaluate(env).getValue();
         double rightV = right != null ? (Double) right.evaluate(env).getValue() : 0.0;
         
-        // Valuta l'operatore logico
+        // Evaluate the logic operator 
         switch(operator) {
-        	case ">":  return leftV > rightV;    // Maggiore di
-        	case "≥":  return leftV >= rightV;   // Maggiore o uguale a
-        	case "<":  return leftV < rightV;    // Minore di
-            case "≤":  return leftV <= rightV;   // Minore o uguale a
-            case "=":  return leftV == rightV;   // Uguale a
-            case "≠":  return leftV != rightV;   // Diverso da
+        	case ">":  return leftV > rightV;    
+        	case "≥":  return leftV >= rightV;   
+        	case "<":  return leftV < rightV;    
+            case "≤":  return leftV <= rightV;   
+            case "=":  return leftV == rightV;   
+            case "≠":  return leftV != rightV;   
             default: 
             	throw new UnsupportedOperationException("Operatore booleano non supportato: " + operator);
         }
